@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "Display.h"
-#include <GL/glew.h>
+
 
 Display::Display(int width, int height, const std::string &title) {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -26,7 +26,6 @@ Display::Display(int width, int height, const std::string &title) {
 	if(status != GLEW_OK){
 		std::cerr << "Glew failed to init!" << std::endl;
 	}
-
 
 }
 
@@ -50,4 +49,9 @@ void Display::Update() {
 
 bool Display::IsClosed() {
 	return m_isClosed;
+}
+
+void Display::Clear(float r, float g, float b, float a) {
+	glClearColor(r, g, b, a);  // set clear color
+	glClear(GL_COLOR_BUFFER_BIT);           // actually clear it
 }
