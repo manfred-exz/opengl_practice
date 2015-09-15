@@ -100,6 +100,7 @@ GLuint CreateShader(const string &text, GLenum shaderType) {
 }
 
 
+//check
 void Shader::Bind() {
 	glUseProgram(m_program);
 }
