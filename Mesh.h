@@ -26,8 +26,8 @@ public:
 	virtual ~Mesh();
 
 private:
-	Mesh(const Mesh& other);
-	void operator=(const Mesh& other);
+//	Mesh(const Mesh& other);
+//	void operator=(const Mesh& other);
 
 	enum{
 		POSITION_VB,

@@ -5,7 +5,7 @@ set(CMAKE_CURRENT_SOURCE_DIR "/home/manfred/workspace/cg/modern_opengl")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "/home/manfred/workspace/cg/modern_opengl")
 
 
-set(SOURCE_FILES main.cpp Display.cpp Display.h Shader.cpp Shader.h Mesh.cpp Mesh.h)
+set(SOURCE_FILES main.cpp Display.cpp Display.h Shader.cpp Shader.h Mesh.cpp Mesh.h stb_image.cpp stb_image.h Texture.cpp Texture.h)
 add_executable(modern_opengl ${SOURCE_FILES})
 
 find_package(OpenGL REQUIRED)

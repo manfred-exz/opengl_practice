@@ -60,8 +60,8 @@ static string LoadShader(const string &fileName) {
 }
 
 
-void static CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string &errorMessage) {
-	GLint success = GL_FALSE;
+void static CheckShaderError(GLuint shader, GLenum flag, bool isProgram, const string &errorMessage) {
+	GLint success = GL_TRUE;
 	GLchar error[1024] = {0};
 
 	if (isProgram)
@@ -103,4 +103,5 @@ GLuint CreateShader(const string &text, GLenum shaderType) {
 //check
 void Shader::Bind() {
 	glUseProgram(m_program);
+
 }
