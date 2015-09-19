@@ -6,6 +6,7 @@
 #include "stb_image.h"
 #include <cassert>
 #include <iostream>
+using namespace std;
 
 Texture::Texture(const std::string &fileName) {
     int width, height, numComponents;
@@ -33,8 +34,6 @@ void Texture::Bind(unsigned int unit) {
 
     glActiveTexture(GL_TEXTURE0 + unit);
     glBindTexture(GL_TEXTURE_2D, m_texture);
-
-
 }
 
 Texture::~Texture() {

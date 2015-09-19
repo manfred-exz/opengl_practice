@@ -14,14 +14,19 @@ static GLuint CreateShader(const string& text, GLenum shaderType);
 
 Shader::Shader(const string &fileName) {
 	m_program = glCreateProgram();
-	m_shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
-	m_shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
+	m_shaders[0] = CreateShader(LoadShader(fileName + ".vs.glsl"), GL_VERTEX_SHADER);
+	m_shaders[1] = CreateShader(LoadShader(fileName + ".fs.glsl"), GL_FRAGMENT_SHADER);
+
+	cout << "we got shader[0]: " << m_shaders[0] << endl;
+	cout << "we got shader[1]: " << m_shaders[1] << endl;
+
 
 	for(unsigned int i = 0; i < NUM_SHADERS; ++i){
 		glAttachShader(m_program, m_shaders[i]);
 	}
 
 	glBindAttribLocation(m_program, 0, "position");
+	glBindAttribLocation(m_program, 1, "texCoord");
 
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Program linking failed: ");
@@ -56,13 +61,15 @@ static string LoadShader(const string &fileName) {
 		cerr << "Unable to load shader: " << fileName << endl;
 	}
 
+	cout << output << endl;
+
 	return output;
 }
 
 
 void static CheckShaderError(GLuint shader, GLenum flag, bool isProgram, const string &errorMessage) {
 	GLint success = GL_TRUE;
-	GLchar error[1024] = {0};
+	GLchar error[1024];
 
 	if (isProgram)
 		glGetProgramiv(shader, flag, &success);
@@ -75,7 +82,8 @@ void static CheckShaderError(GLuint shader, GLenum flag, bool isProgram, const s
 		else
 			glGetShaderInfoLog(shader, sizeof(error), NULL, error);
 
-		cerr << errorMessage << ": '" << error << "'" << endl;
+		cerr << errorMessage << ": " << endl << error << endl;
+		cerr.flush();
 	}
 }
 
@@ -96,7 +104,7 @@ GLuint CreateShader(const string &text, GLenum shaderType) {
 
 	CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error: Shader compilation failed!");
 
-	return 0;
+	return shader;
 }
 
 
